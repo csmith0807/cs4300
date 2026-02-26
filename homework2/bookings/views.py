@@ -20,3 +20,9 @@ class BookingViewSet(viewsets.ModelViewSet):
     #Assign logged-in user when creating booking
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+#Movie view set
+class MovieViewSet(viewsets.ModelViewSet):
+    queryset = Movie.objects.all()      #Get all movies
+    serializer_class = MovieSerializer  
+
