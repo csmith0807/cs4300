@@ -7,7 +7,7 @@ class Movie(models.Model):
     release_date = models.DateField()
     duration = models.IntegerField(help_text="Duration in minutes")
 
-    def __str__self:
+    def __str__(self):
         return self.title
 
 #Seat model 

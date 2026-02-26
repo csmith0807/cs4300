@@ -1,3 +1,6 @@
 homework2/myenv/
+myenv/
+venv/
+env/
 __pycache__/
 *.pyc
