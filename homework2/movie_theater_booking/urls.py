@@ -20,7 +20,7 @@ from bookings import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('bookings.urls')),
     path('', views.movie_list, name='home'),
+    path('', include('bookings.urls')),
 ]
 

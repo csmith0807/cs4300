@@ -16,5 +16,5 @@ urlpatterns = [
     path('movies/', views.movie_list, name='movie_list'),              # Movie list page
     path('book/<int:movie_id>/', views.book_seat, name='book_seat'),  # Seat booking page
     path('history/', views.booking_history, name='booking_history'),  # Booking history page
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
 ]
