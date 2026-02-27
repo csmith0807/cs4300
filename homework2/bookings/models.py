@@ -13,11 +13,12 @@ class Movie(models.Model):
 
 #Seat model 
 class Seat(models.Model):
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     seat_number = models.CharField(max_length=10)
     is_booked = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.seat_number
+        return f"{self.movie.title} - {self.seat_number}"
 
 #Booking model to connect user, movie, and seat
 class Booking(models.Model):
