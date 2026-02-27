@@ -3,6 +3,8 @@ from rest_framework.permissions import IsAuthenticated
 from .models import Movie, Seat, Booking
 from .serializers import MovieSerializer, SeatSerializer, BookingSerializer
 from rest_framework import viewsets
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
 
 #view to display all movies
 def movie_list(request):
@@ -12,28 +14,25 @@ def movie_list(request):
     })
 
 #view to book a seat for a movie
+@login_required
 def book_seat(request, movie_id):
-    #get selected movie
-    movie = Movie.objects.get(id=movie_id)
+    movie = get_object_or_404(Movie, id=movie_id)
 
-    #return only seats that aren't booked
-    seats = Seat.objects.filter(is_booked=False)
+    seats = Seat.objects.filter(movie=movie, is_booked=False)
 
     if request.method == "POST":
         seat_id = request.POST.get("seat")
-        seat = Seat.objects.get(id=seat_id)
-        #label seat booked
+        seat = get_object_or_404(Seat, id=seat_id, movie=movie)
+
         seat.is_booked = True
         seat.save()
 
-        #create booking record
         Booking.objects.create(
             movie=movie,
             seat=seat,
             user=request.user
         )
 
-        #return to booking history page
         return redirect('booking_history')
 
     return render(request, 'bookings/seat_booking.html', {
