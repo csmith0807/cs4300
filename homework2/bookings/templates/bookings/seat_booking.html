@@ -7,34 +7,43 @@
 <div class="card shadow p-4">
     <h3 class="mb-3">Book Seat for "{{ movie.title }}"</h3>
 
+    <div class="mb-3">
+        <span class="badge bg-primary">Available</span>
+        <span class="badge bg-danger">Booked</span>
+    </div>
+    
     <form method="POST">
         {% csrf_token %}
-
-        <!-- Seat Selection Dropdown -->
-        <div class="mb-3">
-            <label class="form-label">Select Available Seat</label>
-
-            <select name="seat" class="form-select" required>
-                <option value="">-- Choose a Seat --</option>
-
+    
+        <div class="container">
+            <div class="row">
                 {% for seat in seats %}
-                <option value="{{ seat.id }}">
-                    {{ seat.seat_number }}
-                </option>
+                <div class="col-2 mb-3 text-center">
+                        <input type="radio"
+                               class="btn-check"
+                               name="seat"
+                               id="seat{{ seat.id }}"
+                               value="{{ seat.id }}"
+                               {% if seat.is_booked %} disabled {% endif %}
+                               required>
+    
+                            <label class="btn w-100
+                               {% if seat.is_booked %}
+                                   btn-danger disabled
+                               {% else %}
+                                   btn-outline-primary
+                               {% endif %}"
+                               for="seat{{ seat.id }}">
+                            {{ seat.seat_number }}
+                        </label>
+                    </div>
                 {% endfor %}
-            </select>
+            </div>
         </div>
-
-        <!-- Submit Button -->
+    
         <button type="submit" class="btn btn-success">
-            Confirm Booking
+            Book Selected Seat
         </button>
-
-        <a href="{% url 'movie_list' %}" 
-           class="btn btn-secondary">
-           Cancel
-        </a>
-
     </form>
 </div>
 
