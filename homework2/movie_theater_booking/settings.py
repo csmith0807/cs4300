@@ -29,7 +29,8 @@ ALLOWED_HOSTS = []
 
 #Login URL
 LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'movie_list'
+LOGOUT_REDIRECT_URL = 'movie_list'
 
 # Application definition
 
