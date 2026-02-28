@@ -17,4 +17,5 @@ class SeatSerializer(serializers.ModelSerializer):
 class BookingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Booking
-        fields = '__all__'
+        fields = ['id', 'movie', 'seat', 'user']
+        read_only_fields = ['user']
