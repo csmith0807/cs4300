@@ -135,9 +135,3 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#Auto-create superuser
-if os.environ.get("CREATE_SUPERUSER") == "True":
-    User = get_user_model()
-    if not User.objects.filter(username="admin").exists():
-        User.objects.create_superuser("admin", "admin@example.com", "admin123")
-        
