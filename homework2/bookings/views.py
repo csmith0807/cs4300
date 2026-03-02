@@ -41,6 +41,7 @@ def book_seat(request, movie_id):
     })
 
 #view to see current bookings
+@login_required
 def booking_history(request):
     #get bookings
     bookings = Booking.objects.filter(user=request.user)
@@ -62,7 +63,7 @@ class BookingViewSet(viewsets.ModelViewSet):
     # Automatically assign logged-in user
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
-        
+
     # Only return bookings belonging to the current user
     def get_queryset(self):
         return Booking.objects.filter(user=self.request.user)
