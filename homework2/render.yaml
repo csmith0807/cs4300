@@ -6,16 +6,17 @@ databases:
 
 services:
   - type: web
-    plan: free
-    name: movie_theater_booking
+    name: movie-theater-booking
     runtime: python
-    pythonVersion: 3.11
-    buildCommand: './build.sh'
-    startCommand: 'python -m gunicorn movie_theater_booking.asgi:application -k uvicorn.workers.UvicornWorker' 
+    plan: free
+    buildCommand: "./build.sh"
+    startCommand: "python -m gunicorn movie_theater_booking.asgi:application -k uvicorn.workers.UvicornWorker"
     envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
       - key: DATABASE_URL
         fromDatabase:
-          name: movie_theater_bookingdb
+          name: mysitedb
           property: connectionString
       - key: SECRET_KEY
         generateValue: true
