@@ -1,4 +1,6 @@
 Movie Theater Booking Application
+Caleb Smith
+CS4300 Homework2
 
 This is a RESTful Movie Theater Booking Application built using Django and Django REST Framework.
 
