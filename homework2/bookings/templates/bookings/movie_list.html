@@ -17,7 +17,7 @@
         <p>{{ movie.duration }}
             Minutes
         </p>
-        <p>{{ movie.release_date }}</p>
+        <p>Release Date: {{ movie.release_date }}</p>
 
         <a href="{% url 'book_seat' movie.id %}" class="btn btn-primary">
             Book Now
